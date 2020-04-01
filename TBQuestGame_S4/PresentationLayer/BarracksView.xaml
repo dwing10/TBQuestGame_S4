@@ -1,0 +1,345 @@
+﻿<Window x:Class="TBQuestGame_S1.PresentationLayer.BarracksView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBQuestGame_S1.PresentationLayer"
+        mc:Ignorable="d"
+        Title="BarracksView" Height="450" Width="800" Background="Black">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/woodWall.jpg" Opacity=".7"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!-- player info -->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,5,0,0"
+                    Content="Legion: "
+                    FontSize="18"
+                    FontFamily="Magneto"
+                    FontWeight="ExtraBold"
+                    Foreground="White">
+                    <Label.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                    </Label.Effect>
+                </Label>
+                <Label
+                    x:Name="legionName"
+                    Content="{Binding Player.LegionName}"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,5,0,0"
+                    FontSize="18"
+                    FontWeight="ExtraBold"
+                    Width="200"
+                    Height="30"
+                    Background="White"/>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,5,0,0"
+                    Content="Imperator: "
+                    FontSize="18"
+                    FontFamily="Magneto"
+                    FontWeight="ExtraBold"
+                    Foreground="White">
+                    <Label.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                    </Label.Effect>
+                </Label>
+                <Label
+                    x:Name="imperatorName"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,5,0,0"
+                    FontSize="18"
+                    FontWeight="ExtraBold"
+                    Width="200"
+                    Height="30"
+                    Background="White"/>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0,5,0,0"
+                    Content="Rank: "
+                    FontSize="18"
+                    FontFamily="Magneto"
+                    FontWeight="ExtraBold"
+                    Foreground="White">
+                    <Label.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                    </Label.Effect>
+                </Label>
+                <Label
+                    x:Name="rank"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,5,0,0"
+                    FontSize="18"
+                    FontWeight="ExtraBold"
+                    Width="200"
+                    Height="30"
+                    Background="White"/>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="0,5,0,0"
+                    Content="Power: "
+                    FontSize="18"
+                    FontFamily="Magneto"
+                    FontWeight="ExtraBold"
+                    Foreground="White">
+                    <Label.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                    </Label.Effect>
+                </Label>
+                <Label
+                    x:Name="power"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0,5,0,0"
+                    FontSize="18"
+                    FontWeight="ExtraBold"
+                    Width="200"
+                    Height="30"
+                    Background="White"/>
+            </Grid>
+        </StackPanel>
+        <!-- Troop info -->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1">
+            <Label
+                HorizontalContentAlignment="Center"
+                Content="Troop Type"
+                FontSize="24"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+            <Label
+                Margin="0,15,0,5"
+                HorizontalContentAlignment="Right"
+                Content="Legionnaire: "
+                FontSize="18"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+            <Label 
+                Margin="0,15,0,5"
+                HorizontalContentAlignment="Right"
+                Content="Archer: "
+                FontSize="18"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+            <Label 
+                Margin="0,15,0,5"
+                HorizontalContentAlignment="Right"
+                Content="Cavalry: "
+                FontSize="18"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1">
+            <Label 
+                Margin="0,15,0,5"
+                HorizontalContentAlignment="Right"
+                Content="Praetorian: "
+                FontSize="18"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+            <Label 
+                Margin="0,15,0,5"
+                HorizontalContentAlignment="Right"
+                Content="Centurion: "
+                FontSize="18"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+            <Label 
+                Margin="0,15,0,5"
+                HorizontalContentAlignment="Right"
+                Content="Praetor: "
+                FontSize="18"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="2">
+            <Label
+                HorizontalContentAlignment="Center"
+                Content="Troop Numbers"
+                FontSize="24"
+                FontFamily="Magneto"
+                FontWeight="ExtraBold"
+                Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                </Label.Effect>
+            </Label>
+            <Label
+                x:Name="LegionnaireNumbers"
+                Margin="0,20,0,0"
+                HorizontalContentAlignment="Center"
+                FontSize="18"
+                FontWeight="ExtraBold"
+                Background="White"
+                Width="100"
+                Height="30"/>
+            <Label
+                x:Name="ArcherNumbers"
+                Margin="0,25,0,0"
+                HorizontalContentAlignment="Center"
+                FontSize="18"
+                FontWeight="ExtraBold"
+                Background="White"
+                Width="100"
+                Height="30"/>
+            <Label
+                x:Name="CavalryNumbers"
+                Margin="0,25,0,0"
+                HorizontalContentAlignment="Center"
+                FontSize="18"
+                FontWeight="ExtraBold"
+                Background="White"
+                Width="100"
+                Height="30"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="2">
+            <Label
+                x:Name="PraetorianNumbers"
+                Margin="0,20,0,0"
+                HorizontalContentAlignment="Center"
+                FontSize="18"
+                FontWeight="ExtraBold"
+                Background="White"
+                Width="100"
+                Height="30"/>
+            <Label
+                x:Name="CenturionNumbers"
+                Margin="0,20,0,0"
+                HorizontalContentAlignment="Center"
+                FontSize="18"
+                FontWeight="ExtraBold"
+                Background="White"
+                Width="100"
+                Height="30"/>
+            <Label
+                x:Name="PraetorNumbers"
+                Margin="0,20,0,0"
+                HorizontalContentAlignment="Center"
+                FontSize="18"
+                FontWeight="ExtraBold"
+                Background="White"
+                Width="100"
+                Height="30"/>
+            <Button
+                Margin="15"
+                Content="Close"
+                FontFamily="Magneto"
+                Width="40"
+                Height="30"
+                Click="Exit_Button_Click" />
+        </StackPanel>
+        <!-- mission -->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="200">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="160"/>
+                </Grid.RowDefinitions>
+                <Label 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Mission: "
+                    FontSize="24"
+                    FontFamily="Magneto"
+                    FontWeight="ExtraBold"
+                    Foreground="White">
+                    <Label.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".9"/>
+                    </Label.Effect>
+                </Label>
+                <TextBox 
+                    Grid.Row="1"
+                    x:Name="MissionBox"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    FontWeight="ExtraBold"
+                    Foreground="White"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
