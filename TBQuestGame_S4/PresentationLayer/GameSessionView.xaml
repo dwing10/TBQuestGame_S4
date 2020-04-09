@@ -159,31 +159,40 @@
                             Width="100"
                             Height="50"
                             FontSize="16"
-                            Background="Silver"
+                            Foreground="White"
+                            BorderBrush="White"
+                            BorderThickness="3"
                             FontWeight="ExtraBold"
-                            Click="Recruit_Button_Click"/>
-                        <Button 
+                            Click="Recruit_Button_Click"
+                            Background="Black">
+                        </Button>
+                        <Button
                             Grid.Column="0"
                             Grid.Row="3"
                             Content="Barracks"
                             Width="100"
                             Height="50"
                             FontSize="16"
-                            Background="Silver"
+                            Foreground="White"
+                            BorderBrush="White"
+                            BorderThickness="3"
                             FontWeight="ExtraBold"
-                            Click="Barracks_Button_Click"/>
+                            Click="Barracks_Button_Click"
+                            Background="Black">
+                            
+                        </Button>
                         <TabControl
                             Grid.Row="4"
                             Grid.Column="0"
-                            x:Name="npcTabControl">
+                            x:Name="npcTabControl"
+                            Background="Black">
                             <TabItem
                                 Header="NPC's"
                                 x:Name="npcTab"
-                                Background="Beige"
+                                Background="Black"
                                 >
                                 <DataGrid 
                                     x:Name="LocationNpcsDataGrid"
-                                    Background="Beige"
                                     ItemsSource="{Binding CurrentLocation.NPCS}" 
                                     SelectedItem="{Binding CurrentNPC}"
                                     AutoGenerateColumns="False"
@@ -193,7 +202,8 @@
                                             Header="Description" 
                                             IsReadOnly="True"                 
                                             Binding="{Binding Information, Mode=OneWay}"
-                                            Width="*">
+                                            Width="*"
+                                            >
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style>
                                                     <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -201,6 +211,9 @@
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
                                     </DataGrid.Columns>
+                                    <DataGrid.Background>
+                                        <ImageBrush ImageSource="/Assets/parchment.jpg"/>
+                                    </DataGrid.Background>
                                 </DataGrid>
                             </TabItem>
                         </TabControl>
@@ -213,25 +226,42 @@
                                 Width="60"
                                 Height="25"
                                 FontSize="14"
+                                Foreground="White"
+                                Background="Black"
+                                BorderBrush="White"
+                                BorderThickness="2"
                                 FontWeight="ExtraBold" 
-                                Click="Speak_Button_Click" />
+                                Click="Speak_Button_Click"
+                                >
+                            </Button>
                             <Button
                                 Margin="50,0,0,5"
                                 Content="Attack"
                                 Width="60"
                                 Height="25"
                                 FontSize="14"
+                                Foreground="White"
+                                Background="Black"
+                                BorderBrush="White"
+                                BorderThickness="2"
                                 FontWeight="ExtraBold" 
-                                Click="Attack_Button_Click" />
+                                Click="Attack_Button_Click"
+                                >
+                            </Button>
                             <Button 
                                 Margin="50,0,0,0"
                                 Content="Retreat"
                                 Width="60"
                                 Height="25"
                                 FontSize="14"
+                                Foreground="White"
+                                Background="Black"
+                                BorderBrush="White"
+                                BorderThickness="2"
                                 FontWeight="ExtraBold" 
                                 Click="Retreat_Button_Click" 
-                                />
+                                >
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -277,8 +307,8 @@
                                 Content="5"
                                 Height="35"
                                 Width="50"
-                                FontSize="18"
-                                FontWeight="ex"
+                                FontSize="16"
+                                FontWeight="ExtraBold"
                                 Foreground="Red"
                                 HorizontalContentAlignment="Center"/>
                         </StackPanel>
@@ -302,7 +332,7 @@
                                 Margin="0,0,65,0"
                                 Content="4"
                                 Width="50"
-                                FontSize="18"
+                                FontSize="16"
                                 FontWeight="ExtraBold"
                                 Foreground="Orange"
                                 HorizontalContentAlignment="Center"/>
@@ -328,7 +358,7 @@
                                 Margin="0,0,90,0"
                                 Content="3"
                                 Width="50"
-                                FontSize="18"
+                                FontSize="16"
                                 FontWeight="ExtraBold"
                                 Foreground="Yellow"
                                 HorizontalContentAlignment="Center"/>
@@ -359,7 +389,7 @@
                                 Content="1"
                                 Height="30"
                                 Width="50"
-                                FontSize="18"
+                                FontSize="16"
                                 FontWeight="ExtraBold"
                                 Foreground="Green"
                                 HorizontalContentAlignment="Center"/>
@@ -400,7 +430,7 @@
                             <Label 
                                 Content="2"
                                 Width="50"
-                                FontSize="18"
+                                FontSize="16"
                                 FontWeight="ExtraBold"
                                 Foreground="Blue"
                                 HorizontalContentAlignment="Center"/>
@@ -426,7 +456,7 @@
                             <Label 
                                 Content="3"
                                 Width="50"
-                                FontSize="18"
+                                FontSize="16"
                                 FontWeight="ExtraBold"
                                 Foreground="Yellow"
                                 HorizontalContentAlignment="Center"/>
@@ -437,12 +467,16 @@
                             Margin="95,65,0,0"
                             Content="i"
                             FontSize="16"
-                            Background="Silver"
+                            Foreground="White"
                             FontWeight="ExtraBold"
                             FontFamily="Magneto"
-                            Width="50"
-                            Height="50" 
-                            Click="Info_Button_Click" />
+                            Width="30"
+                            Height="30" 
+                            Click="Info_Button_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Assets/cracked.jpg" Opacity=".7"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </Border>
                 <Border
@@ -461,7 +495,7 @@
                         <TabControl
                             x:Name= "PlayerInventoryTabs"
                             Width="195"
-                            Background="Khaki">
+                            Background="Black">
 
                                 <TabItem 
                                     Header="Buffs"
@@ -472,8 +506,7 @@
                                         ItemsSource="{Binding Player.Buffs}"
                                         SelectedItem="{Binding CurrentGameItem}"
                                         AutoGenerateColumns="False"
-                                        HeadersVisibility="Column"
-                                        Background="Beige">
+                                        HeadersVisibility="Column">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn 
                                             Header="Name"
@@ -487,6 +520,9 @@
                                             Header="Value"
                                             Binding="{Binding GameItem.Value, Mode=OneWay}"/>
                                         </DataGrid.Columns>
+                                        <DataGrid.Background>
+                                            <ImageBrush ImageSource="/Assets/parchment.jpg"/>
+                                        </DataGrid.Background>
                                     </DataGrid>
                                 </TabItem>
                                 <TabItem 
@@ -498,7 +534,7 @@
                                     SelectedItem="{Binding CurrentGameItem}"
                                     AutoGenerateColumns="False"
                                     HeadersVisibility="Column"
-                                    Background="Khaki">
+                                    >
                                     <DataGrid.Columns>
                                         <DataGridTextColumn 
                                             Header="Name"
@@ -512,7 +548,10 @@
                                             Header="Value"
                                             Binding="{Binding GameItem.Value, Mode=OneWay}"/>
                                     </DataGrid.Columns>
-                                </DataGrid>
+                                        <DataGrid.Background>
+                                            <ImageBrush ImageSource="/Assets/parchment.jpg" />
+                                        </DataGrid.Background>
+                                    </DataGrid>
                             </TabItem>
 
                             <TabItem 
@@ -524,7 +563,7 @@
                                     SelectedItem="{Binding CurrentGameItem}"
                                     AutoGenerateColumns="False"
                                     HeadersVisibility="Column"
-                                    Background="Khaki">
+                                    >
                                     <DataGrid.Columns>
                                         <DataGridTextColumn 
                                             Header="Name"
@@ -538,7 +577,10 @@
                                             Header="Value"
                                             Binding="{Binding GameItem.Value, Mode=OneWay}"/>
                                     </DataGrid.Columns>
-                                </DataGrid>
+                                        <DataGrid.Background>
+                                            <ImageBrush ImageSource="/Assets/parchment.jpg"/>
+                                        </DataGrid.Background>
+                                    </DataGrid>
                             </TabItem>
                         </TabControl>
                     </StackPanel>
@@ -550,16 +592,26 @@
                                 Width="50"
                                 Height="30"
                                 FontSize="16"
+                                Foreground="White"
+                                Background="Black"
+                                BorderBrush="White"
+                                BorderThickness="2"
                                 FontWeight="ExtraBold" 
-                                Click="Use_Button_Click"/>
+                                Click="Use_Button_Click">
+                            </Button>
                             <Button
                                 Margin="5,15,0,0"
                                 Content="Drop"
                                 Width="50"
                                 Height="30"
                                 FontSize="16"
+                                Foreground="White"
+                                Background="Black"
+                                BorderBrush="White"
+                                BorderThickness="2"
                                 FontWeight="ExtraBold" 
-                                Click="Drop_Button_Click"/>
+                                Click="Drop_Button_Click">
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </Border>

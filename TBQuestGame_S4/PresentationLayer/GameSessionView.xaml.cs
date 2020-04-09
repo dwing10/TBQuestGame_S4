@@ -32,7 +32,7 @@ namespace TBQuestGame_S1.PresentationLayer
         private void Map_Location_Button_Click(object sender, RoutedEventArgs e)
         {
             Button windowButton = sender as Button;
-            //_gameSessionViewModel.Timer();
+            //_gameSessionViewModel.Timer(windowButton.Tag.ToString());
             _gameSessionViewModel.Move(windowButton.Tag.ToString());
         }
 

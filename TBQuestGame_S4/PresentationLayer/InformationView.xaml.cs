@@ -25,10 +25,18 @@ namespace TBQuestGame_S1.PresentationLayer
 
             InitializeComponent();
             travelText.Text = "Click on a location name to travel to that location. " +
-                "Some locations are inaccessible until certain objectives have been completed";
+                "Some locations are inaccessible until certain objectives have been completed. ";
+
             battlingText.Text = "Click on an enemy name and then click the attack button to battle them. " +
                 "If your power is greater than the enemy's power, then you will defeat them. " +
-                "Defeating an enemy will grant you rewards, but losing comes at a cost.";
+                "Victory in battle will increase your wealth, but even victory comes at a cost. " +
+                "Whether you win or lose, your legion will be sure to suffer casualties.";
+
+            recruitText.Text = "Recruiting new troops will increase your overall power. In addition, you" +
+                "will need to recruit certain troops to gain access to locked locations. To purchase troops " +
+                "click on the recruit button on the main window. Once you are in the recruitment window, simply " +
+                "select the troop type (or item) and click purchase. You can also see information about the troop" +
+                "type or itme by clicking the info button.";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -151,41 +151,21 @@
     <Resource Include="Assets\compass.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\gameMap.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\land.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\map2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\MundasBlank.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\wood2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\woodWall.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\NewMundas.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Mundas.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\FinalMundas.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\cracked.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\darkParchment.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\parchment.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

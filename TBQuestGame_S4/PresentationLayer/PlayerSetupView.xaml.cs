@@ -31,6 +31,10 @@ namespace TBQuestGame_S1.PresentationLayer
             SetUpWindow();
 
             nameTextBox.Focus();
+
+            missionBox.Text = "You have been tasked by your Emperor and the High Council to lay seige on enemy lands. " +
+                "Along with the title of Imperator, you have been given a legion and a starting sum of gold. " +
+                "Use your newfound status and wealth wisely. The Emperor will not tolerate failure. ";
         }
 
         /// <summary>
@@ -38,12 +42,6 @@ namespace TBQuestGame_S1.PresentationLayer
         /// </summary>
         private void SetUpWindow()
         {
-            List<string> startStyle = Enum.GetNames(typeof(Player.StartStyle)).ToList();
-            List<string> gender = Enum.GetNames(typeof(Player.Gender)).ToList();
-
-            startStyleComboBox.ItemsSource = startStyle;
-            genderComboBox.ItemsSource = gender;
-
             errorMessageTextBlock.Visibility = Visibility.Hidden;
         }
 
@@ -77,30 +75,6 @@ namespace TBQuestGame_S1.PresentationLayer
 
             if (IsValidInput(out errorMessage))
             {
-                Enum.TryParse(genderComboBox.SelectionBoxItem.ToString(), out Player.Gender gender);
-                Enum.TryParse(startStyleComboBox.SelectionBoxItem.ToString(), out Player.StartStyle startStyle);
-
-                _player.PlayerGender = gender;
-                _player.PlayerStartStyle = startStyle;
-
-                if (_player.PlayerStartStyle == Player.StartStyle.neutral)
-                {
-                    _player.Power = 500;
-                    _player.Rank = 1;
-                }
-
-                if (_player.PlayerStartStyle == Player.StartStyle.offensive)
-                {
-                    _player.Power = 600;
-                    _player.Rank = 1;
-                }
-
-                if (_player.PlayerStartStyle == Player.StartStyle.deffensive)
-                {
-                    _player.Power = 400;
-                    _player.Rank = 1;
-                }
-
                 Visibility = Visibility.Hidden;
             }
             else

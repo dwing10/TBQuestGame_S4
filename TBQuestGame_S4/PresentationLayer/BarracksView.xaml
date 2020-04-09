@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:TBQuestGame_S1.PresentationLayer"
         mc:Ignorable="d"
         Title="BarracksView" Height="450" Width="800" Background="Black">
-    <Grid>
+    <StackPanel>
+        <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/woodWall.jpg" Opacity=".7"/>
+            <ImageBrush ImageSource="/Assets/parchment.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -342,4 +343,5 @@
             </Grid>
         </StackPanel>
     </Grid>
+    </StackPanel>
 </Window>

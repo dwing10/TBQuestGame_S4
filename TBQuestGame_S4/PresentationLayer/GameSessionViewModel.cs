@@ -29,6 +29,8 @@ namespace TBQuestGame_S1.PresentationLayer
 
         private Random random = new Random();
 
+        private System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+
         #endregion
 
         #region Properties
@@ -259,27 +261,28 @@ namespace TBQuestGame_S1.PresentationLayer
         /// <summary>
         /// timer that is used when traveling
         /// </summary>
-        public void Timer()
-        {
-            System.Windows.Threading.DispatcherTimer travelTimer = new System.Windows.Threading.DispatcherTimer();
-            travelTimer.Tick += dispatcherTimer_Tick;
-            travelTimer.Interval = new TimeSpan(0, 0, 5);
-            travelTimer.Start();
-        }
+        //public void Timer(string tagName)
+        //{
+        //    travelTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+        //    travelTimer.Interval = new TimeSpan(0, 0, 5);
+        //    travelTimer.Start();
+
+        //    Move(tagName);
+
+        //}
 
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-
-        }
+        //private void dispatcherTimer_Tick(object sender, EventArgs e)
+        //{
+        //    travelTimer.Stop();
+        //    travelTimer.IsEnabled = false;
+        //}
 
         /// <summary>
         /// Binds buttons to locations
         /// </summary>
         public void Move(string tagName)
         {
-            //Timer();
-
             switch (tagName)
             {
                 case "Alheimurrinn":
@@ -303,7 +306,7 @@ namespace TBQuestGame_S1.PresentationLayer
                     break;
 
                 case "Qua Redi":
-                    if (Player.NumOfSeigeWeapons > 3)
+                    if (Player.NumOfSeigeWeapons > 3 && Player.CenturionNumbers > 3)
                     {
                         _currentLocation.IsAccessible = true;
                         foreach (Location location in AccessibleLocations)
@@ -317,7 +320,7 @@ namespace TBQuestGame_S1.PresentationLayer
                     else
                     {
                         _currentLocation.IsAccessible = false;
-                        CurrentLocationInformation = "Acquire more seige weaponry to travel to this location";
+                        CurrentLocationInformation = "Acquire more seige weaponry to tr and stronger troops avel to this location.";
                     }
                     break;
 
@@ -336,7 +339,7 @@ namespace TBQuestGame_S1.PresentationLayer
                     else
                     {
                         _currentLocation.IsAccessible = false;
-                        CurrentLocationInformation = "You must secure the port of Elmire and acquire ships" +
+                        CurrentLocationInformation = "You must secure the port of Elkmire and acquire ships " +
                             "before you can travel to Dore.";
                     }
                     break;
@@ -550,6 +553,9 @@ namespace TBQuestGame_S1.PresentationLayer
             return npcBattleResponse;
         }
 
+        /// <summary>
+        /// battle method
+        /// </summary>
         private void Battle()
         {
             if (_currentNPC is IBattle)
@@ -557,78 +563,153 @@ namespace TBQuestGame_S1.PresentationLayer
                 IBattle battleNPC = _currentNPC as IBattle;
                 int playerHitPoints = 0;
                 int battleNpcHitPoints = 0;
-                string battleInformation = "";
                 playerHitPoints = CalculatePlayerHitPoints();
                 battleNpcHitPoints = CalculateNPCHitPoints(battleNPC);
 
-                battleInformation +=
-                     $"Player: {_player.BattleMode}     Hit Points: {playerHitPoints}" + Environment.NewLine +
-                     $"NPC: {battleNPC.BattleMode}     Hit Points: {battleNpcHitPoints}" + Environment.NewLine;
+                //bool battling = false;
+                //do
+                //{
+
+                //    CurrentLocationInformation =
+                //    $"Player: {_player.BattleMode}     Hit Points: {playerHitPoints}" + Environment.NewLine +
+                //    $"NPC: {battleNPC.BattleMode}     Hit Points: {battleNpcHitPoints}" + Environment.NewLine;
+                //} while (!battling);
 
                 if (playerHitPoints >= battleNpcHitPoints)
                 {
-                    battleInformation += $"You have defeated {_currentNPC.Name}";
                     _currentLocation.NPCS.Remove(_currentNPC);
                     DetermineRewards();
                 }
                 else
                 {
-                    battleInformation += $"{_currentNPC.Name} has defeated you";
+                    DetermineLosses();
                 }
 
             }
             else
             {
-                CurrentLocation.Description = "It seems the enemy is not ready to meet us in battle, try again later.";
+                CurrentLocationInformation = "It seems the enemy is not ready to meet us in battle, try again later.";
             }
         }
 
+        /// <summary>
+        /// Determine rewards for winning
+        /// </summary>
         private void DetermineRewards()
         {
-            if (_currentNPC.Name == "North Bourg")
+            int troopLosses = 0;
+
+            //if location is North Bourg
+            if (_currentLocation.Name == "North Bourg")
             {
                 GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
                 if (gameItemQuantity != null)
                 {
-                    gameItemQuantity.Quantity += 500;
+                    gameItemQuantity.Quantity += 100;
                 }
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(15, 25);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have won and have gained 100 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
 
                 Player.NorthBourgIsDefeated = true;
             }
+
+            //if location is south bourg
             else if (_currentLocation.Name == "South Bourg")
             {
                 GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
                 if (gameItemQuantity != null)
                 {
-                    gameItemQuantity.Quantity += 1000;
+                    gameItemQuantity.Quantity += 300;
                 }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(20, 35);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have won and have gained 300 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
             }
+
+            //if location is elkmire
             else if (_currentLocation.Name == "Elkmire")
             {
                 GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
                 if (gameItemQuantity != null)
                 {
-                    gameItemQuantity.Quantity += 1250;
+                    gameItemQuantity.Quantity += 550;
                 }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(25, 40);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have won and have gained 550 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
 
                 Player.ElkmireIsDefeated = true;
             }
+
+            //if location is dore
             else if (_currentLocation.Name == "Dore")
             {
                 GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
                 if (gameItemQuantity != null)
                 {
-                    gameItemQuantity.Quantity += 3500;
+                    gameItemQuantity.Quantity += 700;
                 }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(55, 75);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have won and have gained 700 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+
             }
+
+            //if location is qua redi
             else if (_currentLocation.Name == "Qua Redi")
             {
                 GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
                 if (gameItemQuantity != null)
                 {
-                    gameItemQuantity.Quantity += 5000;
+                    gameItemQuantity.Quantity = 1500;
                 }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(100, 125);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have won and have gained 1500 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+
             }
+
+            //if locaion is alheimurrinn
             else if (_currentLocation.Name == "Alheimurrinn")
             {
                 GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
@@ -636,6 +717,152 @@ namespace TBQuestGame_S1.PresentationLayer
                 {
                     gameItemQuantity.Quantity += 10000;
                 }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(150, 225);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have won and have gained 10000 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+
+            }
+        }
+
+        /// <summary>
+        /// Determines losses for player
+        /// </summary>
+        private void DetermineLosses()
+        {
+            int troopLosses = 0;
+
+            //if location is north bourg
+            if (_currentLocation.Name == "North Bourg")
+            {
+                GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
+                if (gameItemQuantity != null)
+                {
+                    gameItemQuantity.Quantity -= 100;
+                }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(90, 110);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have been defeated and have lost 100 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+            }
+
+            //if location is south bourg
+            else if (_currentLocation.Name == "South Bourg")
+            {
+                GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
+                if (gameItemQuantity != null)
+                {
+                    gameItemQuantity.Quantity -= 300;
+                }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(100, 120);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have been defeated and have lost 300 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+            }
+
+            //if location is elkmire
+            else if (_currentLocation.Name == "Elkmire")
+            {
+                GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
+                if (gameItemQuantity != null)
+                {
+                    gameItemQuantity.Quantity -= 550;
+                }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(120, 140);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have been defeated and have lost 550 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+            }
+
+            //if location is dore
+            else if (_currentLocation.Name == "Dore")
+            {
+                GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
+                if (gameItemQuantity != null)
+                {
+                    gameItemQuantity.Quantity -= 700;
+                }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(150, 200);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have been defeated and have lost 700 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+            }
+
+            //if location is qua redi
+            else if (_currentLocation.Name == "Qua Redi")
+            {
+                GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
+                if (gameItemQuantity != null)
+                {
+                    gameItemQuantity.Quantity -= 1500;
+                }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(200, 250);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have been defeated and have lost 1500 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
+            }
+
+            //if location is alheimurrinn
+            else if (_currentLocation.Name == "Alheimurrinn")
+            {
+                GameItemQuantity gameItemQuantity = _player.Inventory.FirstOrDefault(i => i.GameItem.Id == "GLD");
+                if (gameItemQuantity != null)
+                {
+                    gameItemQuantity.Quantity -= 10000;
+                }
+
+                if (Player.LegionnaireNumbers > 50)
+                {
+                    troopLosses = random.Next(300, 400);
+                    Player.LegionnaireNumbers -= troopLosses;
+                    Player.Power -= troopLosses;
+                }
+
+                CurrentLocationInformation = "You have been defeated and have lost 10000 gold!" + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    $"Legionnaire lost in the battle: {troopLosses}";
             }
         }
 

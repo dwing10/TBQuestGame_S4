@@ -27,18 +27,16 @@ namespace TBQuestGame_S1.DataLayer
                 PlayerGender = Player.Gender.male,
                 Title = Character.CharacterTitle.Praetor,
                 PlayerStartStyle = Player.StartStyle.neutral,
-                Power = 510,
+                Power = 450,
                 Rank = 1,
                 Inventory = new ObservableCollection<GameItemQuantity>()
                 {
                     new GameItemQuantity(GameItemById("GLD"), 500),
-                    new GameItemQuantity(GameItemById("LEG"), 300),
-                    new GameItemQuantity(GameItemById("ARC"), 200),
+                    new GameItemQuantity(GameItemById("LEG"), 450),
                     new GameItemQuantity(GameItemById("INS"), 1),
                     new GameItemQuantity(GameItemById("TRI"), 1)
                 },
-                LegionnaireNumbers = 500,
-                ArcherNumbers = 300
+                LegionnaireNumbers = 450
             };
         }
 
@@ -153,6 +151,20 @@ namespace TBQuestGame_S1.DataLayer
                 }
             });
 
+            gameMap.Locations.Add(new Location()
+            {
+                ID = 7,
+                Name = "Elkmire",
+                Description = "\t Elkmire sits south of the Aquila Empire. Securing its ports is the key " +
+                "to reaching the desert nations of Dore and Qua Redi.",
+                EnemyRank = 3,
+                IsAccessible = true,
+                NPCS = new ObservableCollection<NPC>()
+                {
+                    NpcById("ENEMY6")
+                }
+            });
+
             gameMap.CurrentLocation = gameMap.Locations.FirstOrDefault(l => l.ID == 1);
 
             return gameMap;
@@ -263,15 +275,29 @@ namespace TBQuestGame_S1.DataLayer
                 {
                     ID = "ENEMY5",
                     Name = "Tribes of South Bourg",
-                    Description = "Rank 2",
+                    Description = "Rank 3",
+                    Title = Character.CharacterTitle.Enemy,
+                    Messages = new List<string>()
+                    {
+                        "It would be wise of you to retreat. "
+                    },
+                    Rank = 3,
+                    Power = rand.Next(500, 750)
+                },
+
+                new EnemyMilitary()
+                {
+                    ID = "ENEMY6",
+                    Name = "Kingdom of Elkmire",
+                    Description = "Rank 3",
                     Title = Character.CharacterTitle.Enemy,
                     Messages = new List<string>()
                     {
                         "Leave our lands!",
                         "We will not be oppressed by you!"
                     },
-                    Rank = 2,
-                    Power = rand.Next(500, 750)
+                    Rank = 3,
+                    Power = rand.Next(750, 999)
                 },
 
                 new Citizen()

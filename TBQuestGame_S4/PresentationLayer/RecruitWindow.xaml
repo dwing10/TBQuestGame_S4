@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBQuestGame_S1.PresentationLayer"
         mc:Ignorable="d"
-        Title="RecruitWindow" Height="450" Width="800" Background="Black">
+        Title="RecruitWindow" Height="350" Width="250" Background="Black">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/woodWall.jpg" Opacity=".7"/>
+            <ImageBrush ImageSource="/Assets/darkParchment.jpg" Opacity=".7"/>
         </Grid.Background>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -27,8 +26,14 @@
                     Foreground="White"
                     FontWeight="ExtraBold"
                     HorizontalAlignment="Center"/>
+                <Label 
+                    Content="* Select an item from dropdown list below."
+                    FontSize="8"
+                    Foreground="White"
+                    HorizontalContentAlignment="Center"/>
                 <ComboBox 
                     x:Name="itemsBox"
+                    Width="200"
                     Height="30">
                     <ComboBoxItem Content="50 Legionnaire -- 100 gold"/>
                     <ComboBoxItem Content="50 Archers -- 150 gold"/>
@@ -39,28 +44,44 @@
                     <ComboBoxItem Content="1 Catapult -- 2500 gold"/>
                     <ComboBoxItem Content="Small Naval Fleet -- 3000 gold" />
                 </ComboBox>
-                <Button 
-                    Content="Purchase"
-                    Width="70"
-                    FontSize="14"
-                    FontWeight="ExtraBold" 
-                    Click="Purchase_Button_Click"/>
-            </StackPanel>
-            <StackPanel
-                Grid.Row="0"
-                Grid.Column="1">
-              <TextBox 
-                x:Name="descriptionBox"
-                  Height="100"
-                  Width="300"/>
-                <Button 
+                <TextBox 
+                    Margin="0,10,0,0"
+                    x:Name="descriptionBox"
+                    TextWrapping="Wrap"
+                    Height="80"
+                    Width="200"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    IsReadOnly="True"/>
+                <StackPanel
+                    Orientation="Horizontal"
+                    Width="160"
+                    Margin="0,15,0,0">
+                    <Button 
+                        Margin="5"
+                        Content="Purchase"
+                        Height="30"
+                        Width="70"
+                        FontSize="14"
+                        FontWeight="ExtraBold" 
+                        Click="Purchase_Button_Click"/>
+                    <Button
+                        Margin="5"
+                        Content="Info"
+                        Width="70"
+                        Height="30"
+                        FontSize="14"
+                        FontWeight="ExtraBold"
+                        Click="Info_Button_Click"/>
+                </StackPanel>
+                <Button
+                    Margin="15"
                     Content="Exit"
                     Width="70"
                     FontSize="14"
                     FontWeight="ExtraBold"
                     Click="Exit_Button_Click"/>
             </StackPanel>
-            
         </Grid>
     </Grid>
 </Window>

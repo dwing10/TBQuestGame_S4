@@ -25,20 +25,18 @@ namespace TBQuestGame_S1.PresentationLayer
         {
             _player = player;
             InitializeComponent();
-
-            ItemDescription();
         }
 
         /// <summary>
         /// fill text box with item descriptions
         /// </summary>
-        public void ItemDescription()
+        private void Info_Button_Click(object sender, RoutedEventArgs e)
         {
-            string itemSelection = itemsBox.SelectedItem as string;
+            string itemSelection = itemsBox.SelectionBoxItem as string;
 
             if (itemSelection == "50 Legionnaire -- 100 gold")
             {
-                descriptionBox.Text = "Legionnaire are the backbone of any legion. They are cheap tp train and " +
+                descriptionBox.Text = "Legionnaire are the backbone of any legion. They are cheap to train and " +
                     "loyal until the end. 50 Legionnaire will increase your power by 50.";
             }
             if (itemSelection == "50 Archers -- 150 gold")
@@ -83,7 +81,7 @@ namespace TBQuestGame_S1.PresentationLayer
         /// </summary>
         private void Purchase_Button_Click(object sender, RoutedEventArgs e)
         {
-            string itemSelection = itemsBox.SelectedItem as string;
+            string itemSelection = itemsBox.SelectionBoxItem as string;
 
             //legionnaire
             if (itemSelection == "50 Legionnaire -- 100 gold")
